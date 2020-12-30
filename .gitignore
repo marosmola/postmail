@@ -1,3 +1,9 @@
 # python env
 .venv
 .python-version
+
+# Default django db
+*.sqlite3
+
+# Python
+*.pyc
