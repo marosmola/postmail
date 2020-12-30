@@ -1,10 +1,12 @@
+import environ
 from pathlib import Path
 
+env = environ.Env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-SECRET_KEY = 'epr_q%r31n8k(sz6)j8^_-r6ngbrq51m+nz5hy$)9cjizv+p_n'
-DEBUG = True
-ALLOWED_HOSTS = []
+SECRET_KEY = env('SECRET_KEY')
+DEBUG = env.bool('DEBUG', default=False)
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 
 INSTALLED_APPS = [
@@ -15,6 +17,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'corsheaders',
     'client'
 ]
 
@@ -23,6 +26,7 @@ AUTH_USER_MODEL = 'client.User'
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -107,6 +111,7 @@ LOGGING = {
     },
 }
 
+CORS_ALLOW_ALL_ORIGINS = True
 
 LANGUAGE_CODE = 'sk-SK'
 TIME_ZONE = 'UTC'

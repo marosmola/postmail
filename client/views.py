@@ -30,7 +30,7 @@ class PostEmail(APIView):
             postmark = PostmarkClient(server_token=integration.postmark_api_token)
             postmark.emails.send(
                 From=integration.from_email,
-                To=receiver,
+                To=integration.to_emails.split(','),
                 Subject=subject,
                 HtmlBody=message
             )

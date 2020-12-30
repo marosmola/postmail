@@ -26,6 +26,7 @@ class PostmarkIntegration(models.Model):
     url = models.URLField()
     postmark_api_token = models.CharField(max_length=100)
     from_email = models.EmailField()
+    to_emails = models.CharField(max_length=255)
 
     def __str__(self):
         return "postmark_{}".format(self.token)
