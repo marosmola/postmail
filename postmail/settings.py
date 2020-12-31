@@ -56,10 +56,8 @@ WSGI_APPLICATION = 'postmail.wsgi.application'
 
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default':
+        env.db('DATABASE_URL', default='sqlite:///db.sqlite3')
 }
 
 
@@ -120,3 +118,4 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
+STATIC_ROOT = '/app/staticfiles/'

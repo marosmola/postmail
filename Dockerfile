@@ -7,6 +7,8 @@ RUN apk --no-cache add \
     bash \
     make
 
+RUN pip install gunicorn psycopg2
+
 COPY requirements.txt /
 RUN pip install -r requirements.txt
 

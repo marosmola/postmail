@@ -9,11 +9,14 @@ class User(AbstractUser):
 
 
 class Client(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField('Názov', max_length=100)
+    name = models.CharField('Názov', max_length=100, unique=True)
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        super(Client, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = 'Klient'
