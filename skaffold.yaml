@@ -1,0 +1,19 @@
+apiVersion: skaffold/v2beta4
+kind: Config
+metadata:
+  name: postmail
+build:
+  artifacts:
+  - image: marosmola/postmail
+    context: .
+profiles:
+- name: stag
+  deploy:
+    kustomize:
+      paths:
+      - devops/staging
+- name: prod
+  build:
+    tagPolicy:
+      envTemplate:
+        template: "{{.IMAGE_NAME}}:{{.CI_COMMIT_TAG}}"
